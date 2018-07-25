@@ -14,7 +14,7 @@
 让我们看看如何对n-gram向量和序列向量执行这两个步骤，以及如何使用特征选择和规范化技术优化向量表示.
 
 ### N-gram载体[选项A]
-在随后的段落中，我们将看到如何对n-gram模型进行标记化和矢量化。 我们还将介绍如何使用特征选择和规范化技术优化n-gram表示。
+在随后的段落中，我们将看到如何对n-gram模型进行tokenization和vectorization。 我们还将介绍如何使用特征选择和规范化技术优化n-gram表示。
 
 在n-gram向量中，文本被表示为唯一n-gram的集合：n个相邻tokens的组（通常是单词）。 考虑一下文本```The mouse ran up the clock```。 在这里，单词unigrams（n = 1）是 ```['the', 'mouse', 'ran', 'up', 'clock'], the word bigrams (n = 2) are ['the mouse', 'mouse ran', 'ran up', 'up the', 'the clock']```,等等
 
