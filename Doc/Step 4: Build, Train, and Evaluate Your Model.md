@@ -201,8 +201,10 @@ def sepcnn_model(blocks,
 #### 表3：训练超参数
 
 以下Keras代码使用上面表2和表3中选择的参数实现了训练过程：
-```
-
+```python
+def train_ngram_model(data,
+                      learning_rate=1e-3,
+                      epochs=1000,
                       batch_size=128,
                       layers=2,
                       units=64,
@@ -277,5 +279,5 @@ def sepcnn_model(blocks,
     # Save model.
     model.save('IMDb_mlp_model.h5')
     return history['val_acc'][-1], history['val_loss'][-1]
-    ```
+```
 
