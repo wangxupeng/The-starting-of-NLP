@@ -62,7 +62,7 @@ clock': 8, 'down': 1, 'ran down': 5}
 ```
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/TopKvsAccuracy.svg)
 #### 图6：前K特征与精度。 在整个数据集中，精度平稳在20K特征左右。
-### 正常化
+### Normalization
 标准化将所有要素/样本值转换为小值和类似值。 这简化了学习算法中的梯度下降收敛。 从我们所看到的情况来看，数据预处理期间的规范化似乎并没有在文本分类问题中增加太多价值; 我们建议您跳过此步骤。
 
 以下代码汇总了上述所有步骤：
