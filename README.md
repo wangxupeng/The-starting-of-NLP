@@ -4,9 +4,9 @@ This repository is to translate [google text classification tutorial](https://de
 
 ## 目录结构
 
-* [一、简介(Introduction)](../Doc/Introduction.md)
+* [一、简介(Introduction)](Doc/Introduction.md)
 
-* [二、收集数据(Step 1: Gather Data)](../Doc/Gather_Data.md)
+* [二、收集数据(Step 1: Gather Data)](Doc/Gather_Data.md)
 
 * [三、数据探索(Step 2:Explore_Your_Data)](/Doc/Explore_Your_Data.md)
 
