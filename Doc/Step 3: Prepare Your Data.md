@@ -159,10 +159,10 @@ One-hot encoding: 在n维空间中使用单词向量表示序列，其中n =词�
 ```
 Word embeddings: 单词具有与之相关的含义。 结果，我们可以在密集的向量空间（〜几百个实数）中表示单词标记，其中单词之间的位置和距离表示它们在语义上有多相似（参见图7）。 这种表示称为单词嵌入。
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/WordEmbeddings.png)
-#### 图7：Word嵌入
+#### 图7：Word embeddings
 序列模型通常具有这样的嵌入层作为它们的第一层。 该层学习在训练过程中将单词索引序列转换为单词嵌入向量，使得每个单词索引被映射到表示该单词在语义空间中的位置的实数值的密集向量（参见图8）。
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/EmbeddingLayer.png)
-#### 图8：嵌入层
+#### 图8：Embedding layer
 
 #### 特征选择
 并非我们数据中的所有单词都有助于标签预测。 我们可以通过从词汇表中丢弃罕见或不相关的单词来优化我们的学习过程。 事实上，我们观察到使用最常见的20,000个特征通常就足够了。 对于n-gram模型也是如此（参见图6）。
