@@ -169,7 +169,7 @@ Word embeddings: 单词具有与之相关的含义。 结果，我们可以在�
 *  使用前20,000个token创建词汇表
 *  将标记转换为序列向量
 *  将序列填充到固定的序列长度
-'''python
+```python
 from tensorflow.python.keras.preprocessing import sequence
 from tensorflow.python.keras.preprocessing import text
 
@@ -214,3 +214,5 @@ def sequence_vectorize(train_texts, val_texts):
     x_val = sequence.pad_sequences(x_val, maxlen=max_length)
     return x_train, x_val, tokenizer.word_index
 ```    
+#### 标签矢量化
+我们看到了如何将示例文本数据转换为数字向量。 必须对标签应用类似的过程。 我们可以简单地将标签转换为范围[0，num_classes - 1]中的值。 例如，如果有3个类，我们可以使用值0,1和2来表示它们。 在内部，网络将使用单热矢量来表示这些值（以避免推断标签之间的错误关系）。 这种表示取决于我们在神经网络中使用的损失函数和最后一层激活函数。 我们将在下一节中详细了解这些内容。
