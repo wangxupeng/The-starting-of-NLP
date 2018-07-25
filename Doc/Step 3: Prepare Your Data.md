@@ -18,7 +18,7 @@
 
 在n-gram向量中，文本被表示为唯一n-gram的集合：n个相邻tokens的组（通常是单词）。 考虑一下文本```The mouse ran up the clock```。 在这里，单词unigrams（n = 1）是 ```['the', 'mouse', 'ran', 'up', 'clock'], the word bigrams (n = 2) are ['the mouse', 'mouse ran', 'ran up', 'up the', 'the clock']```,等等
 
-#### tokenizer
+#### Tokenization
 我们发现，将单词unigrams + bigrams标记为提供良好的准确性，同时减少计算时间。
 
 #### Vectorization
