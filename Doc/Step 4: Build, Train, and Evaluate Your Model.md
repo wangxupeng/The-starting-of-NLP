@@ -69,6 +69,6 @@ def mlp_model(layers, units, dropout_rate, input_shape, num_classes):
 
     model.add(Dense(units=op_units, activation=op_activation))
     return model
-    ```
+ ```
     
  
