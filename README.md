@@ -8,6 +8,18 @@ This repository is to translate [google text classification tutorial](https://de
 
 * [二、收集数据(Step 1: Gather Data)](../Doc/Gather_Data.md)
 
-* [三、数据探索(Step 2:Explore_Your_Data.md.md)](/Doc/Explore_Your_Data.md)
+* [三、数据探索(Step 2:Explore_Your_Data)](/Doc/Explore_Your_Data.md)
 
-* [三、选择模型(Step 2.5: Choose a Model.md)](/Doc/Choose_a_Model.md)
+* [四、选择模型(Step 2.5: Choose a Model)](/Doc/Choose_a_Model.md)
+
+* [五、数据准备(Step 3: Prepare_Your_Data)](/Doc/Prepare_Your_Data.md)
+
+* [六、构建，培训和评估您的模型(Step 4: Build_Train_and_Evaluate_Your_Model)](/Doc/Build_Train_and_Evaluate_Your_Model.md)
+
+* [七、调整超参数(Step 5: Tune_Hyperparameters)](/Doc/Tune_Hyperparameters.md)
+
+* [八、部署模型(Step 6: Deploy_Your_Model)](/Doc/Deploy_Your_Model.md)
+
+* [九、总结(Step 7: Conclusion)](/Doc/Conclusion.md)
+
+* [十、附录：批量训练(Step 8: Appendix:Batch_Training)](/Doc/Appendix:Batch_Training.md)
