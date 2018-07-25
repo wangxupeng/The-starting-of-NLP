@@ -70,7 +70,7 @@ clock': 8, 'down': 1, 'ran down': 5}
 *  将文本样本标记为单词uni + bigrams，
 *  使用tf-idf编码进行矢量化，
 *  通过丢弃出现少于2次的标记并使用f_classif计算要素重要性，仅从标记向量中选择前20,000个要素。
-```
+```python
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
