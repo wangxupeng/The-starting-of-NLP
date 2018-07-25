@@ -71,4 +71,125 @@ def mlp_model(layers, units, dropout_rate, input_shape, num_classes):
     return model
  ```
     
- 
+## 构建序列模型[选项B]
+我们将可以从token的邻接中学习的模型称为序列模型。这包括CNN和RNN类型的模型。数据被预处理为这些模型的序列向量。
+
+序列模型通常具有大量要学习的参数。这些模型中的第一层是嵌入层，它学习密集向量空间中的单词之间的关系。学习单词关系最适合许多样本。
+
+给定数据集中的单词很可能不是该数据集唯一的。因此，我们可以使用其他数据集来学习数据集中单词之间的关系。为此，我们可以将从另一个数据集中学习的嵌入转移到嵌入层中。这些嵌入被称为预训练嵌入。使用预先训练的嵌入使模型在学习过程中处于领先地位。
+
+有预先训练好的嵌入可用大型语料库训练，如GloVe。 GloVe已经在多个语料库（主要是维基百科）上接受过训练。我们使用GloVe嵌入版本测试了我们的序列模型的训练，并观察到如果我们冻结预训练嵌入的权重并仅训练网络的其余部分，则模型表现不佳。这可能是因为嵌入层被训练的上下文可能与我们使用它的上下文不同。
+
+在维基百科数据上训练的GloVe嵌入可能与我们的IMDb数据集中的语言模式不一致。 推断的关系可能需要一些更新 - 即，嵌入权重可能需要上下文调整。 我们分两个阶段完成：
+
+1.在第一次运行中，嵌入层权重被冻结，我们允许网络的其余部分学习。 在此运行结束时，模型权重达到比未初始化值更好的状态。 对于第二次运行，我们允许嵌入层也学习，对网络中的所有权重进行微调。 我们将此过程称为使用微调嵌入。
+
+2.微调嵌入可以提高精度。 然而，这是以增加训练网络所需的计算能力为代价的。 给定足够数量的样本，我们也可以从头开始学习嵌入。 我们观察到，对于S / W> 15K，从头开始有效地产生与使用微调嵌入相同的精度。
+
+我们比较了不同的序列模型，如CNN，sepCNN（深度可分离卷积网络），RNN（LSTM和GRU），CNN-RNN和堆叠RNN，改变了模型架构。 我们发现sepCNNs是一种卷积网络变体，通常更具数据效率和计算效率，其性能优于其他模型。
+
+```注意：RNN仅与一小部分用例相关。 我们没有尝试使用具有注意力的QRNN或RNN等模型，因为它们的准确性改进将被更高的计算成本所抵消。```
+
+以下代码构造了一个四层sepCNN模型：
+```python
+from tensorflow.python.keras import models
+from tensorflow.python.keras import initializers
+from tensorflow.python.keras import regularizers
+
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.layers import Dropout
+from tensorflow.python.keras.layers import Embedding
+from tensorflow.python.keras.layers import SeparableConv1D
+from tensorflow.python.keras.layers import MaxPooling1D
+from tensorflow.python.keras.layers import GlobalAveragePooling1D
+
+def sepcnn_model(blocks,
+                 filters,
+                 kernel_size,
+                 embedding_dim,
+                 dropout_rate,
+                 pool_size,
+                 input_shape,
+                 num_classes,
+                 num_features,
+                 use_pretrained_embedding=False,
+                 is_embedding_trainable=False,
+                 embedding_matrix=None):
+    """Creates an instance of a separable CNN model.
+
+    # Arguments
+        blocks: int, number of pairs of sepCNN and pooling blocks in the model.
+        filters: int, output dimension of the layers.
+        kernel_size: int, length of the convolution window.
+        embedding_dim: int, dimension of the embedding vectors.
+        dropout_rate: float, percentage of input to drop at Dropout layers.
+        pool_size: int, factor by which to downscale input at MaxPooling layer.
+        input_shape: tuple, shape of input to the model.
+        num_classes: int, number of output classes.
+        num_features: int, number of words (embedding input dimension).
+        use_pretrained_embedding: bool, true if pre-trained embedding is on.
+        is_embedding_trainable: bool, true if embedding layer is trainable.
+        embedding_matrix: dict, dictionary with embedding coefficients.
+
+    # Returns
+        A sepCNN model instance.
+    """
+    op_units, op_activation = _get_last_layer_units_and_activation(num_classes)
+    model = models.Sequential()
+
+    # Add embedding layer. If pre-trained embedding is used add weights to the
+    # embeddings layer and set trainable to input is_embedding_trainable flag.
+    if use_pretrained_embedding:
+        model.add(Embedding(input_dim=num_features,
+                            output_dim=embedding_dim,
+                            input_length=input_shape[0],
+                            weights=[embedding_matrix],
+                            trainable=is_embedding_trainable))
+    else:
+        model.add(Embedding(input_dim=num_features,
+                            output_dim=embedding_dim,
+                            input_length=input_shape[0]))
+
+    for _ in range(blocks-1):
+        model.add(Dropout(rate=dropout_rate))
+        model.add(SeparableConv1D(filters=filters,
+                                  kernel_size=kernel_size,
+                                  activation='relu',
+                                  bias_initializer='random_uniform',
+                                  depthwise_initializer='random_uniform',
+                                  padding='same'))
+        model.add(SeparableConv1D(filters=filters,
+                                  kernel_size=kernel_size,
+                                  activation='relu',
+                                  bias_initializer='random_uniform',
+                                  depthwise_initializer='random_uniform',
+                                  padding='same'))
+        model.add(MaxPooling1D(pool_size=pool_size))
+
+    model.add(SeparableConv1D(filters=filters * 2,
+                              kernel_size=kernel_size,
+                              activation='relu',
+                              bias_initializer='random_uniform',
+                              depthwise_initializer='random_uniform',
+                              padding='same'))
+    model.add(SeparableConv1D(filters=filters * 2,
+                              kernel_size=kernel_size,
+                              activation='relu',
+                              bias_initializer='random_uniform',
+                              depthwise_initializer='random_uniform',
+                              padding='same'))
+    model.add(GlobalAveragePooling1D())
+    model.add(Dropout(rate=dropout_rate))
+    model.add(Dense(op_units, activation=op_activation))
+    return model
+```
+
+## 训练你的模型
+现在我们已经构建了模型架构，我们需要训练模型。 训练涉及基于模型的当前状态进行预测，计算预测的不正确程度，以及更新网络的权重或参数以最小化该误差并使模型更好地预测。 我们重复这个过程，直到我们的模型融合并且无法再学习。 该过程有三个关键参数（见表2）。
+
+1.指标：如何使用指标衡量模型的性能。 我们在实验中使用精度作为度量标准。
+2.损失函数：用于计算损失值的函数，训练过程然后通过调整网络权重来尝试最小化该损失值。 对于分类问题，交叉熵损失效果很好。
+3.优化器：一种函数，用于根据损失函数的输出决定如何更新网络权重。 我们在实验中使用了流行的Adam优化器。
+
+在Keras中，我们可以使用compile方法将这些学习参数传递给模型。
+![](../Pic/step4/step4-1.png)
