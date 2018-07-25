@@ -1,5 +1,5 @@
 # 步骤一:收集数据
-收集数据是解决任何监督机器学习问题的最重要步骤。 您的文本分类器只能与构建它的数据集一样好。
+收集数据是解决任何监督机器学习问题的最重要步骤。 只有构建好的数据集您的分类器才能表现的好。
 
 如果您没有想要解决的特定问题，并且只对一般的文本分类感兴趣，那么可以使用大量的开源数据集。 您可以在我们的[GitHub](https://github.com/google/eng-edu/blob/master/ml/guides/text_classification/load_data.py)仓库中找到其中一些链接。 另一方面，如果您要解决特定问题，则需要收集必要的数据。 许多组织提供用于访问其数据的公共API - 例如，[Twitter API](https://developer.twitter.com/en/docs)或[NY Times API](http://developer.nytimes.com/)。 您可以利用这些来解决您要解决的问题。
 
