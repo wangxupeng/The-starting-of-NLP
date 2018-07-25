@@ -16,3 +16,34 @@
 在随后的段落中，我们将看到如何对n-gram模型进行标记化和矢量化。 我们还将介绍如何使用特征选择和规范化技术优化n-gram表示。
 
 在n-gram向量中，文本被表示为唯一n-gram的集合：n个相邻tokens的组（通常是单词）。 考虑一下文本```The mouse ran up the clock```。 在这里，单词unigrams（n = 1）是 ```['the', 'mouse', 'ran', 'up', 'clock'], the word bigrams (n = 2) are ['the mouse', 'mouse ran', 'ran up', 'up the', 'the clock']```,等等
+
+tokenizer
+我们发现，将单词unigrams + bigrams标记为提供良好的准确性，同时减少计算时间。
+
+Vectorization
+一旦我们将文本样本分成n-gram，我们需要将这些n-gram转换为我们的机器学习模型可以处理的数值向量。 下面的示例显示了为两个文本生成的unigrams和bigrams分配的索引。
+
+```
+Texts: 'The mouse ran up the clock' and 'The mouse ran down'
+Index assigned for every token: {'the': 7, 'mouse': 2, 'ran': 4, 'up': 10,
+  'clock': 0, 'the mouse': 9, 'mouse ran': 3, 'ran up': 6, 'up the': 11, 'the
+clock': 8, 'down': 1, 'ran down': 5}
+```
+将索引分配给n-gram后，我们通常使用以下选项之一进行矢量化。
+
+One-hot encoding:每个示例文本都表示为一个向量，表示文本中是否存在token中。
+
+```'The mouse ran up the clock' = [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]```
+
+每个示例文本都表示为一个向量，指示文本中token的计数。 请注意，对应于unigram'the'（下面用粗体）对应的元素现在表示为2，因为单词“the”在文本中出现两次。
+```'The mouse ran up the clock' = [1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1]```
+
+Tf-idf encoding: 上述两种方法的问题在于，在所有文档中以相似频率出现的常用词（即，对数据集中的文本样本不是特别独特的词）不会受到惩罚。 例如，像“a”这样的单词将在所有文本中非常频繁地出现。 因此，对于“the”而言，比其他更有意义的单词更高的token数量并不是非常有用。
+```
+'The mouse ran up the clock' = [0.33, 0, 0.23, 0.23, 0.23, 0, 0.33, 0.47, 0.33,
+0.23, 0.33, 0.33] (See Scikit-learn TdidfTransformer)
+```
+还有许多其他矢量表示，但以上三种是最常用的。
+
+我们观察到tf-idf编码在准确性方面略优于其他两个（平均：高出0.25-15％），并建议使用此方法对n-gram进行矢量化。 但是，请记住它占用更多内存（因为它使用浮点表示）并且需要更多时间来计算，特别是对于大型数据集（在某些情况下可能需要两倍的时间）。
+
