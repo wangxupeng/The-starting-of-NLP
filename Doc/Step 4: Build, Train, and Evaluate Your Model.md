@@ -276,5 +276,5 @@ def sepcnn_model(blocks,
     # Save model.
     model.save('IMDb_mlp_model.h5')
     return history['val_acc'][-1], history['val_loss'][-1]
-```
+    ```
 
