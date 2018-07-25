@@ -1,5 +1,5 @@
-#介绍
+# 介绍
 文本分类算法是大规模处理文本数据的各种软件系统的核心。 电子邮件软件使用文本分类来确定传入邮件是发送到收件箱还是过滤到垃圾邮件文件夹中。 论坛使用文本分类来确定评论是否应标记为不当。
 
 这是主题分类的两个示例，将文本文档分类为预定义的一组主题。 在许多主题分类问题中，这样的分类问题主要基于文本中的关键字。
-![](../../Pic/introduction/TextClassificationExample.png)
+![](../Pic/introduction/TextClassificationExample.png)
