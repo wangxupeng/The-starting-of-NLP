@@ -75,3 +75,34 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
 * 样本长度分布：分布显示数据集中每个样本的单词数。
 让我们看看这些指标的值对于IMDb评论数据集是什么（有关字频和样本长度分布的图，请参见图3和图4）。
 ![](../Pic/step2/step2-1.png)
+
+### 表1：IMDb审查数据集指标
+explore_data.py包含用于计算和分析这些指标的函数。 以下是几个例子：
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def get_num_words_per_sample(sample_texts):
+    """Returns the median number of words per sample given corpus.
+
+    # Arguments
+        sample_texts: list, sample texts.
+
+    # Returns
+        int, median number of words per sample.
+    """
+    num_words = [len(s.split()) for s in sample_texts]
+    return np.median(num_words)
+
+def plot_sample_length_distribution(sample_texts):
+    """Plots the sample length distribution.
+
+    # Arguments
+        samples_texts: list, sample texts.
+    """
+    plt.hist([len(s) for s in sample_texts], 50)
+    plt.xlabel('Length of a sample')
+    plt.ylabel('Number of samples')
+    plt.title('Sample length distribution')
+    plt.show()
+```
