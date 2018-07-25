@@ -108,3 +108,7 @@ def plot_sample_length_distribution(sample_texts):
 ```
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/FrequencyDistributionOfWordsIMDb.svg)
 ### 图3：IMDb的字的频率分布
+
+![](https://developers.google.com/machine-learning/guides/text-classification/images/DistributionOfSampleLengthIMDb.svg)
+
+### 图4：IMDb的样本长度分布图3：IMDb的字的频率分布
