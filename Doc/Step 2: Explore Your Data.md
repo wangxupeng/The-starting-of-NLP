@@ -74,3 +74,4 @@ def load_imdb_sentiment_analysis_dataset(data_path, seed=123):
 
 * 样本长度分布：分布显示数据集中每个样本的单词数。
 让我们看看这些指标的值对于IMDb评论数据集是什么（有关字频和样本长度分布的图，请参见图3和图4）。
+![](../Pic/step2/step2-1.png)
