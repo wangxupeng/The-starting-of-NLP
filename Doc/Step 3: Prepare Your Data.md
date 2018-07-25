@@ -56,7 +56,7 @@ Tf-idf encoding: 上述两种方法的问题在于，在所有文档中以相似
 ```
 我们在这里的测试中只使用英文文本。 理想的功能数量可能因语言而异; 这可以在后续分析中探讨。
 ```
-![](https://www.google.com.hk/search?client=aff-cs-360chromium&ie=UTF-8&q=We+used+exclusively+English+texts+in+our+tests+here.+The+ideal+number+of+features+may+vary+by+languages%3B+this+could+be+explored+in+follow-up+analyses.&oq=We+used+exclusively+English+texts+in+our+tests+here.+The+ideal+number+of+features+may+vary+by+languages%3B+this+could+be+explored+in+follow-up+analyses.&aqs=chrome..69i57&)
+![](https://developers.google.com/machine-learning/guides/text-classification/images/TopKvsAccuracy.svg)
 #### 图6：前K特征与精度。 在整个数据集中，精度平稳在20K特征左右。
 ### 正常化
 标准化将所有要素/样本值转换为小值和类似值。 这简化了学习算法中的梯度下降收敛。 从我们所看到的情况来看，数据预处理期间的规范化似乎并没有在文本分类问题中增加太多价值; 我们建议您跳过此步骤。
