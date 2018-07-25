@@ -14,7 +14,7 @@
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/LastLayer.png)
 #### 图10：最后一层
 下面的代码定义了一个函数，该函数将类的数量作为输入，并输出适当数量的层单元（1个单元用于二进制分类;否则每个类1个单元）和相应的激活函数：
-```
+```python
 def _get_last_layer_units_and_activation(num_classes):
     """Gets the # units and activation function for the last network layer.
 
