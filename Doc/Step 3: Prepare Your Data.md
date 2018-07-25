@@ -47,3 +47,22 @@ Tf-idf encoding: 上述两种方法的问题在于，在所有文档中以相似
 
 我们观察到tf-idf编码在准确性方面略优于其他两个（平均：高出0.25-15％），并建议使用此方法对n-gram进行矢量化。 但是，请记住它占用更多内存（因为它使用浮点表示）并且需要更多时间来计算，特别是对于大型数据集（在某些情况下可能需要两倍的时间）。
 
+### 特征选择
+当我们将数据集中的所有文本转换为单词uni + bigram标记时，我们最终可能会有数万个标记。 并非所有这些令牌/特征都有助于标签预测。 因此，我们可以删除某些令牌，例如在数据集中极少发生的令牌。 我们还可以测量特征重要性（每个标记对标签预测的贡献程度），并且仅包括信息量最大的标记。
+
+有许多统计函数可以获取特征和相应的标签并输出特征重要性分数。 两个常用的函数是f_classif和chi2。 我们的实验表明，这两个功能同样表现良好。
+
+更重要的是，我们发现许多数据集的精度达到了大约20,000个特征（见图6）。 在此阈值上添加更多功能的贡献非常小，有时甚至会导致过度拟合并降低性能。
+```
+我们在这里的测试中只使用英文文本。 理想的功能数量可能因语言而异; 这可以在后续分析中探讨。
+```
+![](https://www.google.com.hk/search?client=aff-cs-360chromium&ie=UTF-8&q=We+used+exclusively+English+texts+in+our+tests+here.+The+ideal+number+of+features+may+vary+by+languages%3B+this+could+be+explored+in+follow-up+analyses.&oq=We+used+exclusively+English+texts+in+our+tests+here.+The+ideal+number+of+features+may+vary+by+languages%3B+this+could+be+explored+in+follow-up+analyses.&aqs=chrome..69i57&)
+#### 图6：前K特征与精度。 在整个数据集中，精度平稳在20K特征左右。
+### 正常化
+标准化将所有要素/样本值转换为小值和类似值。 这简化了学习算法中的梯度下降收敛。 从我们所看到的情况来看，数据预处理期间的规范化似乎并没有在文本分类问题中增加太多价值; 我们建议您跳过此步骤。
+
+以下代码汇总了上述所有步骤：
+
+*  将文本样本标记为单词uni + bigrams，
+*  使用tf-idf编码进行矢量化，
+*  通过丢弃出现少于2次的标记并使用f_classif计算要素重要性，仅从标记向量中选择前20,000个要素。
