@@ -2,6 +2,7 @@
 在本节中，我们将致力于构建，培训和评估我们的模型。 在第3步中，我们选择使用n-gram模型或序列模型，使用我们的S / W比率。 现在，是时候编写我们的分类算法并对其进行训练。 我们将使用TensorFlow与tf.keras API进行此操作。
 
 使用Keras构建机器学习模型就是将层，数据处理构建块组装在一起，就像我们组装乐高积木一样。 这些层允许我们指定要对输入执行的转换序列。 由于我们的学习算法采用单个文本输入并输出单个分类，因此我们可以使用Sequential模型API创建线性图层堆栈。
+
 ![](https://developers.google.com/machine-learning/guides/text-classification/images/LinearStackOfLayers.png)
 #### 图9：线性堆叠层
 
