@@ -193,3 +193,88 @@ def sepcnn_model(blocks,
 
 在Keras中，我们可以使用compile方法将这些学习参数传递给模型。
 ![](../Pic/step4/step4-1.png)
+#### 表2：学习参数
+
+实际训练使用拟合方法进行。 根据数据集的大小，这是大多数计算周期将花费的方法。 在每次训练迭代中，使用来自训练数据的batch_size样本数来计算损失，并根据此值更新权重一次。 一旦模型看到整个训练数据集，训练过程就完成了一个epoch。 在每个epoch结束时，我们使用验证数据集来评估模型的学习效果。 我们使用数据集重复训练预定数量的时期。 我们可以通过early stopping来优化这一点，当验证准确度在连续时期之间稳定时，表明模型不再训练。
+![](../Pic/step4/step4-2.png)
+#### 表3：训练超参数
+
+以下Keras代码使用上面表2和表3中选择的参数实现了训练过程：
+```
+
+                      batch_size=128,
+                      layers=2,
+                      units=64,
+                      dropout_rate=0.2):
+    """Trains n-gram model on the given dataset.
+
+    # Arguments
+        data: tuples of training and test texts and labels.
+        learning_rate: float, learning rate for training model.
+        epochs: int, number of epochs.
+        batch_size: int, number of samples per batch.
+        layers: int, number of `Dense` layers in the model.
+        units: int, output dimension of Dense layers in the model.
+        dropout_rate: float: percentage of input to drop at Dropout layers.
+
+    # Raises
+        ValueError: If validation data has label values which were not seen
+            in the training data.
+    """
+    # Get the data.
+    (train_texts, train_labels), (val_texts, val_labels) = data
+
+    # Verify that validation labels are in the same range as training labels.
+    num_classes = explore_data.get_num_classes(train_labels)
+    unexpected_labels = [v for v in val_labels if v not in range(num_classes)]
+    if len(unexpected_labels):
+        raise ValueError('Unexpected label values found in the validation set:'
+                         ' {unexpected_labels}. Please make sure that the '
+                         'labels in the validation set are in the same range '
+                         'as training labels.'.format(
+                             unexpected_labels=unexpected_labels))
+
+    # Vectorize texts.
+    x_train, x_val = vectorize_data.ngram_vectorize(
+        train_texts, train_labels, val_texts)
+
+    # Create model instance.
+    model = build_model.mlp_model(layers=layers,
+                                  units=units,
+                                  dropout_rate=dropout_rate,
+                                  input_shape=x_train.shape[1:],
+                                  num_classes=num_classes)
+
+    # Compile model with learning parameters.
+    if num_classes == 2:
+        loss = 'binary_crossentropy'
+    else:
+        loss = 'sparse_categorical_crossentropy'
+    optimizer = tf.keras.optimizers.Adam(lr=learning_rate)
+    model.compile(optimizer=optimizer, loss=loss, metrics=['acc'])
+
+    # Create callback for early stopping on validation loss. If the loss does
+    # not decrease in two consecutive tries, stop training.
+    callbacks = [tf.keras.callbacks.EarlyStopping(
+        monitor='val_loss', patience=2)]
+
+    # Train and validate model.
+    history = model.fit(
+            x_train,
+            train_labels,
+            epochs=epochs,
+            callbacks=callbacks,
+            validation_data=(x_val, val_labels),
+            verbose=2,  # Logs once per epoch.
+            batch_size=batch_size)
+
+    # Print results.
+    history = history.history
+    print('Validation accuracy: {acc}, loss: {loss}'.format(
+            acc=history['val_acc'][-1], loss=history['val_loss'][-1]))
+
+    # Save model.
+    model.save('IMDb_mlp_model.h5')
+    return history['val_acc'][-1], history['val_loss'][-1]
+```
+
