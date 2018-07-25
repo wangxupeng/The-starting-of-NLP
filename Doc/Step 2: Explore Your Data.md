@@ -106,5 +106,5 @@ def plot_sample_length_distribution(sample_texts):
     plt.title('Sample length distribution')
     plt.show()
 ```
-[](https://developers.google.com/machine-learning/guides/text-classification/images/FrequencyDistributionOfWordsIMDb.svg)
+![](https://developers.google.com/machine-learning/guides/text-classification/images/FrequencyDistributionOfWordsIMDb.svg)
 ### 图3：IMDb的字的频率分布
