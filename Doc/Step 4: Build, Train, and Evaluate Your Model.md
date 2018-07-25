@@ -89,7 +89,7 @@ def mlp_model(layers, units, dropout_rate, input_shape, num_classes):
 
 我们比较了不同的序列模型，如CNN，sepCNN（深度可分离卷积网络），RNN（LSTM和GRU），CNN-RNN和堆叠RNN，改变了模型架构。 我们发现sepCNNs是一种卷积网络变体，通常更具数据效率和计算效率，其性能优于其他模型。
 
-> 注意：RNN仅与一小部分用例相关。 我们没有尝试使用具有注意力的QRNN或RNN等模型，因为它们的准确性改进将被更高的计算成本所抵消。```
+> 注意：RNN仅与一小部分用例相关。 我们没有尝试使用具有注意力的QRNN或RNN等模型，因为它们的准确性改进将被更高的计算成本所抵消。
 
 以下代码构造了一个四层sepCNN模型：
 ```python
