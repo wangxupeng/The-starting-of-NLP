@@ -1,6 +1,6 @@
 # The-starting-of-NLP
 
-This repository is to translate [google text classification tutorial](https://developers.google.com/machine-learning/guides/text-classification/)
+This repository is the translation of [google text classification tutorial](https://developers.google.com/machine-learning/guides/text-classification/)
 
 ## 目录结构
 
