@@ -2,6 +2,8 @@
 
 This repository is the translation of [google text classification tutorial](https://developers.google.com/machine-learning/guides/text-classification/)
 
+# 如果要转载或者复制粘贴请标明原作者谢谢!
+
 ## 目录结构
 
 * [一、简介(Introduction)](Doc/Introduction.md)
