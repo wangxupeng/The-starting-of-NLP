@@ -25,3 +25,5 @@ This repository is the translation of [google text classification tutorial](http
 * [九、总结(Step 7: Conclusion)](/Doc/Conclusion.md)
 
 * [十、附录：批量训练(Step 8: Appendix:Batch_Training)](/Doc/Appendix:Batch_Training.md)
+
+![](deep-learning-with-python-notebooks_5.4-visualizin.png)
