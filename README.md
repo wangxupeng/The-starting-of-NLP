@@ -31,6 +31,6 @@ This repository is the translation of [google text classification tutorial](http
 
 # 深度学习模型
 
-这里用keras还有TensorFlow实现了一些深度学习的模型
+这里用keras还有TensorFlow实现了一些深度学习的模型(大部分采用GPU并行计算)
 
 * [1.Text_cnn](/deep_learning_model/TEXTCNN)
