@@ -13,7 +13,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 sys.path.append(r"./")
 from evaluate import predict2top, f1_avg, Metrics
-from textcnn import cnn
+from cnn_bin import cnn
 from keras.utils import multi_gpu_model
 import gc
 import keras
