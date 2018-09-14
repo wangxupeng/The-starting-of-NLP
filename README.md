@@ -29,7 +29,7 @@ This repository is the translation of [google text classification tutorial](http
 * [十、附录：批量训练(Step 8: Appendix:Batch_Training)](/Doc/Appendix:Batch_Training.md)
 ----------------------------------------------------------------------------------------------------------------------------------
 
-# 一些深度学习模型
+# 深度学习模型
 
 这里用keras还有TensorFlow实现了一些深度学习的模型
 
