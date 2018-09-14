@@ -8,6 +8,18 @@ from tensorflow.python.layers.convolutional import separable_conv1d
 import pandas as pd
 import sys
 
+flags = tf.flags
+flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
+flags.DEFINE_boolean("log_device_placement", True, "Log_device_placement")
+flags.DEFINE_integer('batch_size', 256, 'model batch_size')
+flags.DEFINE_integer('num_classes', 19, 'the number of label classes')
+flags.DEFINE_integer('num_filters', 512, 'the number of filters')
+flags.DEFINE_integer('num_words', 400000, 'the number of most important words in all article')
+flags.DEFINE_integer('maxlen', 1500, 'the number of data length after tokenizer and pad')
+flags.DEFINE_integer('n_epochs', 50, 'the number of epochs')
+flags.DEFINE_integer('DIM', 128, 'the dim of embedding vector')
+FLAGS = flags.FLAGS
+
 
 def bulid_model(sentences, num_words, DIM, num_classes, labels, num_filters):
     with tf.device("cpu:0"):
@@ -111,7 +123,7 @@ def average_gradients(tower_grads):
 
 def num_batch_size(data):
     data_len = len(data)
-    num_batch = int((data_len - 1) / batch_size) + 1
+    num_batch = int((data_len - 1) / FLAGS.batch_size) + 1
 
     return num_batch, data_len
 
@@ -128,19 +140,20 @@ def f1_avg(y_pred, y_true):
     return (f1_micro + f1_macro) / 2
 
 
-if __name__ == '__main__':
-    config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)
+def main(_):
+    config = tf.ConfigProto(allow_soft_placement=FLAGS.allow_soft_placement,
+                            log_device_placement=FLAGS.log_device_placement)
     config.gpu_options.allocator_type = 'BFC'  # A "Best-fit with coalescing" algorithm, simplified from a version of dlmalloc.
     config.gpu_options.allow_growth = True
     config.gpu_options.per_process_gpu_memory_fraction = 0.9
 
-    batch_size = 256
-    num_classes = 19
-    DIM = 128
-    num_filters = 512
-    num_words = 400000
-    maxlen = 1500
-    n_epochs = 50
+    batch_size = FLAGS.batch_size
+    num_classes = FLAGS.num_classes
+    DIM = FLAGS.DIM
+    num_filters = FLAGS.num_filters
+    num_words = FLAGS.num_words
+    maxlen = FLAGS.maxlen
+    n_epochs = FLAGS.n_epochs
     mode = "model_parallel"
     print('num_words = {}, maxlen = {}, mode = {}'.format(num_words, maxlen, mode))
 
@@ -264,3 +277,5 @@ if __name__ == '__main__':
                     del avg_f1_valid
                     del acc_train
                     gc.collect()
+if __name__ == '__main__':
+    tf.app.run()
