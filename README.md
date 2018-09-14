@@ -1,6 +1,7 @@
 # The-starting-of-NLP
 
 # 首先用google的文档来做一个简单的NLP介绍
+----------------------------------------------------------------------------------------------------------------------------------
 This repository is the translation of [google text classification tutorial](https://developers.google.com/machine-learning/guides/text-classification/)
 
 > 如果要转载或者复制粘贴请标明原作者谢谢!
@@ -26,3 +27,10 @@ This repository is the translation of [google text classification tutorial](http
 * [九、总结(Step 7: Conclusion)](/Doc/Conclusion.md)
 
 * [十、附录：批量训练(Step 8: Appendix:Batch_Training)](/Doc/Appendix:Batch_Training.md)
+----------------------------------------------------------------------------------------------------------------------------------
+
+# 一些深度学习模型
+----------------------------------------------------------------------------------------------------------------------------------
+这里用keras还有TensorFlow实现了一些深度学习的模型
+
+* [Text_cnn](/deep_learning_model/TEXTCNN)
