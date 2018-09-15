@@ -18,6 +18,7 @@ flags.DEFINE_integer('num_words', 400000, 'the number of most important words in
 flags.DEFINE_integer('maxlen', 1500, 'the number of data length after tokenizer and pad')
 flags.DEFINE_integer('n_epochs', 50, 'the number of epochs')
 flags.DEFINE_integer('DIM', 128, 'the dim of embedding vector')
+flags.DEFINE_string('mode',"model_parallel", 'here are two mode--model_parallel and data_parallel')
 FLAGS = flags.FLAGS
 
 
@@ -154,7 +155,7 @@ def main(_):
     num_words = FLAGS.num_words
     maxlen = FLAGS.maxlen
     n_epochs = FLAGS.n_epochs
-    mode = "model_parallel"
+    mode = FLAGS.mode
     print('num_words = {}, maxlen = {}, mode = {}'.format(num_words, maxlen, mode))
 
     # data and labels
@@ -277,5 +278,7 @@ def main(_):
                     del avg_f1_valid
                     del acc_train
                     gc.collect()
+
+
 if __name__ == '__main__':
     tf.app.run()
