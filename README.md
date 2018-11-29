@@ -41,3 +41,4 @@ This repository is the translation of [google text classification tutorial](http
 * [5.Res net](deep_learning_model/RESNET/)
 
 # 相关文档
+* [1.Word2Vec](/Doc/Word2Vec/Word2vec原理.docx)
