@@ -39,3 +39,5 @@ This repository is the translation of [google text classification tutorial](http
 * [3.Fast text](/deep_learning_model/FASTTEXT/)
 * [4.Bi-gru fasttext](/deep_learning_model/BIGRU_FASTTEXT/)
 * [5.Res net](deep_learning_model/RESNET/)
+
+# 相关文档
