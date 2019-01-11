@@ -44,3 +44,4 @@ This repository is the translation of [google text classification tutorial](http
 * [1.Word2Vec](/Doc/Word2Vec/Word2vec原理.docx)
 * [2.LDA](/Doc/LDA/LDA主题模型.docx)
 * [3.ResNet](/Doc/ResNet/resnet笔记.docx)
+* [4.Fasttext](/Doc/Fasttext/fasttext笔记.docx)
