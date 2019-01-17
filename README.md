@@ -48,4 +48,5 @@ This repository is the translation of [google text classification tutorial](http
 * [5.Seq-to-Seq](/Doc/Seq_to_Seq/Seq-to-Seq-notes.pdf)
 * [6.Attention](/Doc/Attention/attention-z.docx)
 * [7.Bi-LSTM-Attention](/Doc/Bi-LSTM-Attention/Bi-LSTM-Attention.pdf)
-* [8.ELMo](/Doc//ELMo/ELMo_notes.pdf)
+* [8.ELMo](/Doc/ELMo/ELMo_notes.pdf)
+* [9.BERT](/Doc/BERT/BERT-notes.docx)
