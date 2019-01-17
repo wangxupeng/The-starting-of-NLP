@@ -46,3 +46,4 @@ This repository is the translation of [google text classification tutorial](http
 * [3.ResNet](/Doc/ResNet/resnet笔记.docx)
 * [4.Fasttext](/Doc/Fasttext/fasttext笔记.docx)
 * [5.Seq-to-Seq](/Doc/Seq_to_Seq/Seq-to-Seq-notes.pdf)
+* [6.Attention](/Doc/Attention/attention-z.docx)
