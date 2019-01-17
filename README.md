@@ -45,3 +45,4 @@ This repository is the translation of [google text classification tutorial](http
 * [2.LDA](/Doc/LDA/LDA主题模型.docx)
 * [3.ResNet](/Doc/ResNet/resnet笔记.docx)
 * [4.Fasttext](/Doc/Fasttext/fasttext笔记.docx)
+* [5.Seq to Seq](/Doc/Seq to Seq/Seq to Seq notes.pdf)
