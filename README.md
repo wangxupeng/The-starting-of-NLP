@@ -47,4 +47,4 @@ This repository is the translation of [google text classification tutorial](http
 * [4.Fasttext](/Doc/Fasttext/fasttext笔记.docx)
 * [5.Seq-to-Seq](/Doc/Seq_to_Seq/Seq-to-Seq-notes.pdf)
 * [6.Attention](/Doc/Attention/attention-z.docx)
-* [7.Attention](/Doc/Bi-LSTM-Attention/Bi-LSTM-Attention.pdf)
+* [7.Bi-LSTM-Attention](/Doc/Bi-LSTM-Attention/Bi-LSTM-Attention.pdf)
