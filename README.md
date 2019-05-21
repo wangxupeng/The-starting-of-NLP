@@ -39,7 +39,7 @@ This repository is the translation of [google text classification tutorial](http
 * [3.Fast text](/deep_learning_model/FASTTEXT/)
 * [4.Bi-gru fasttext](/deep_learning_model/BIGRU_FASTTEXT/)
 * [5.Res net](deep_learning_model/RESNET/)
-
+* [6.cnn attention](deep_learning_model/CNN_ATTENTION)
 # 相关论文与笔记
 * [1.Word2Vec](/Doc/Word2Vec/Word2vec原理.docx)
 * [2.LDA](/Doc/LDA/LDA主题模型.docx)
